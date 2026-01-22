@@ -1,0 +1,24 @@
+services:
+  web:
+    build: web
+    ports:
+      - 8080:80
+    networks:
+      - net_wordsmith
+    volumes:
+      - ./web/static:/app/static
+  words:
+    build: words
+    networks:
+      - net_wordsmith
+    volumes:
+      - ./words/pom.xml:/src/pom.xml
+  db:
+    build: db
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+    networks:
+      - net_wordsmith
+
+networks:
+  net_wordsmith:
