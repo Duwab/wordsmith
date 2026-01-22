@@ -8,6 +8,7 @@ COPY dispatcher.go .
 
 RUN go build dispatcher.go
 
+#CMD ./dispatcher no parsing so root and cannot be sigint
 CMD ["./dispatcher"]
 
-# Le répertoire appelé static doit être dans le répertoire courant lors du lancement du serveur.
+EXPOSE 80

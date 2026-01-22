@@ -11,4 +11,6 @@ RUN mvn verify
 # Le résultat est un fichier appelé words.jar placé dans le répertoire target.
 # Le serveur se lance ensuite avec la commande suivante :
 WORKDIR target
+
+#CMD ["java", "-Xmx8m", "-Xms8m", "-jar", "words.jar"]
 CMD exec java -Xmx8m -Xms8m -jar words.jar
