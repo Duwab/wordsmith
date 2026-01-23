@@ -7,7 +7,7 @@ COPY dispatcher.go .
 # COPY . .
 
 ARG CGO_ENABLED=0
-RUN go build dispatcher.go
+RUN --mount=type=cache,target=/root/.cache/go-build go build dispatcher.go
 
 
 FROM scratch
