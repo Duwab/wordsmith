@@ -1,4 +1,4 @@
-FROM debian
+FROM debian AS build
 RUN apt-get update
 RUN apt-get install maven -y
 
@@ -8,9 +8,15 @@ COPY . .
 # Voici la commande qui permet d'invoquer maven pour compiler le programme :
 RUN mvn verify
 
-# Le résultat est un fichier appelé words.jar placé dans le répertoire target.
-# Le serveur se lance ensuite avec la commande suivante :
-WORKDIR target
+FROM amazoncorretto:8-alpine3.23-jre
+
+# FROM debian
+# RUN apt-get update
+# RUN apt-get install default-jre -y
+
+WORKDIR /app
+
+COPY --from=build /src/target .
 
 #CMD ["java", "-Xmx8m", "-Xms8m", "-jar", "words.jar"]
 CMD exec java -Xmx8m -Xms8m -jar words.jar
